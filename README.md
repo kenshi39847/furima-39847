@@ -39,11 +39,11 @@
 
 
 ## purchasesテーブル
-| Column | Type       | Option                         |
-|--------|------------|--------------------------------|
-| id     | integer    | null: false                    |
-| user   | reference  | null: false, foreign_key: true |
-| item   | reference  | null: false, foreign_key: true |
+| Column | Type        | Option                         |
+|--------|-------------|--------------------------------|
+| id     | integer     | null: false                    |
+| user   | references  | null: false, foreign_key: true |
+| item   | references  | null: false, foreign_key: true |
 
 
 ### Association
@@ -54,15 +54,15 @@
 
 
 ## addressesテーブル
-| Column           | Type      | Option                         |
-|------------------|-----------|--------------------------------|
-| post_code        | string    | null: false                    |
-| prefecture_id    | string    | null: false                    |
-| municipalities   | string    | null: false                    |
-| street           | string    | null: false                    |
-| building         | string    | null: true                     |
-| telephone_number | string    | null: false                    |
-| purchase         | reference | null: false, foreign_key: true |
+| Column           | Type        | Option                         |
+|------------------|-------------|--------------------------------|
+| post_code        | string      | null: false                    |
+| prefecture_id    | integer     | null: false                    |
+| municipalities   | string      | null: false                    |
+| street           | string      | null: false                    |
+| building         | string      | null: true                     |
+| telephone_number | string      | null: false                    |
+| purchase         | references  | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase
