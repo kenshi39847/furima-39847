@@ -49,10 +49,20 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Telephone number can't be blank")
       end
-      it 'telephone_numberが10桁以上11桁以内の半角数値でないと保存できないこと' do
-        @purchase_address.telephone_number = '090-1234-5678'
+      it 'telephone_numberが9桁以下では保存できないこと' do
+        @purchase_address.telephone_number = '090123456'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Telephone number is invalid. Input only numbers with 10 to 11 digits")
+        expect(@purchase_address.errors.full_messages).to include("Telephone number is too short")
+      end
+      it 'telephone_numberが12桁以上では保存できないこと' do
+        @purchase_address.telephone_number = '090123456789'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Telephone number is too short")
+      end
+      it '電話番号に半角数字以外が含まれている場合は保存できないこと' do
+        @purchase_address.telephone_number = '０９０１２３４５６７８'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Telephone number is invalid. Input only number")
       end
       it 'userが紐付いていないと保存できないこと' do
         @purchase_address.user_id = nil
